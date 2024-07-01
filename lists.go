@@ -56,15 +56,17 @@ type ListOfLists struct {
 }
 
 type ListCreationRequest struct {
-	Name                string           `json:"name"`
-	Contact             Contact          `json:"contact"`
-	PermissionReminder  string           `json:"permission_reminder"`
-	UseArchiveBar       bool             `json:"use_archive_bar"`
-	CampaignDefaults    CampaignDefaults `json:"campaign_defaults"`
-	NotifyOnSubscribe   string           `json:"notify_on_subscribe"`
-	NotifyOnUnsubscribe string           `json:"notify_on_unsubscribe"`
-	EmailTypeOption     bool             `json:"email_type_option"`
-	Visibility          string           `json:"visibility"`
+	Name                 string           `json:"name"`
+	Contact              Contact          `json:"contact"`
+	PermissionReminder   string           `json:"permission_reminder"`
+	UseArchiveBar        bool             `json:"use_archive_bar"`
+	CampaignDefaults     CampaignDefaults `json:"campaign_defaults"`
+	NotifyOnSubscribe    string           `json:"notify_on_subscribe"`
+	NotifyOnUnsubscribe  string           `json:"notify_on_unsubscribe"`
+	EmailTypeOption      bool             `json:"email_type_option"`
+	Visibility           string           `json:"visibility,omitempty"`
+	MarketingPermissions bool             `json:"marketing_permissions"`
+	DoubleOptIn          bool             `json:"double_optin"`
 }
 
 type ListResponse struct {
