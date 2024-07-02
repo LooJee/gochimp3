@@ -56,13 +56,15 @@ func (api *API) Post(ctx context.Context, path string, body any, result any) err
 		return err
 	}
 
-	normalResp := NormalResponse{}
-	if err := json.Unmarshal(resp.Body(), &normalResp); err != nil {
-		return err
-	}
+	if resp.StatusCode() < 200 || resp.StatusCode() > 300 {
+		normalResp := NormalResponse{}
+		if err := json.Unmarshal(resp.Body(), &normalResp); err != nil {
+			return err
+		}
 
-	if normalResp.Status == "error" {
-		return errors.New(normalResp.Message)
+		if normalResp.Status == "error" {
+			return errors.New(normalResp.Message)
+		}
 	}
 
 	fmt.Println(string(resp.Body()))
