@@ -2,6 +2,8 @@ package mandrill
 
 import (
 	"context"
+	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/go-resty/resty/v2"
 	"net/http"
@@ -32,6 +34,13 @@ func New(apiKey string) *API {
 	return api
 }
 
+type NormalResponse struct {
+	Status  string `json:"status"`
+	Code    int    `json:"code"`
+	Name    string `json:"name"`
+	Message string `json:"message"`
+}
+
 func (api *API) Post(ctx context.Context, path string, body any, result any) error {
 	request := resty.NewWithClient(api.client).NewRequest().SetContext(ctx)
 	if body != nil {
@@ -45,6 +54,15 @@ func (api *API) Post(ctx context.Context, path string, body any, result any) err
 	resp, err := request.Post(ApiHost + path)
 	if err != nil {
 		return err
+	}
+
+	normalResp := NormalResponse{}
+	if err := json.Unmarshal(resp.Body(), &normalResp); err != nil {
+		return err
+	}
+
+	if normalResp.Status == "error" {
+		return errors.New(normalResp.Message)
 	}
 
 	fmt.Println(string(resp.Body()))
