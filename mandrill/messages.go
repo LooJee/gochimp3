@@ -13,11 +13,13 @@ type SendMessageToItem struct {
 }
 
 type SendMessageItem struct {
-	Text      string              `json:"text"`
-	Subject   string              `json:"subject"`
-	FromEmail string              `json:"from_email"`
-	FromName  string              `json:"from_name,omitempty"`
-	To        []SendMessageToItem `json:"to"`
+	Text        string              `json:"text"`
+	Subject     string              `json:"subject"`
+	FromEmail   string              `json:"from_email"`
+	FromName    string              `json:"from_name,omitempty"`
+	To          []SendMessageToItem `json:"to"`
+	TrackOpens  bool                `json:"track_opens"`  // 是否跟踪邮件打开
+	TrackClicks bool                `json:"track_clicks"` // 是否跟踪邮件点击
 }
 
 type SendMessageReq struct {
