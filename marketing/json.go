@@ -1,4 +1,4 @@
-package gochimp3
+package marketing
 
 import (
 	"encoding/json"

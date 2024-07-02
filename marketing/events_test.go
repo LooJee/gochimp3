@@ -1,4 +1,4 @@
-package gochimp3
+package marketing
 
 import (
 	"encoding/json"
@@ -10,7 +10,7 @@ import (
 func TestEventsJson(t *testing.T) {
 	unix := time.Unix(0, 0)
 	eventRequest := &EventRequest{
-		Name:       "huge_deal",
+		Name: "huge_deal",
 		Properties: map[string]string{
 			"R2": "D2",
 		},
@@ -25,7 +25,7 @@ func TestEventsJson(t *testing.T) {
 	assert.Equal(t, eventRequest, backFromJson)
 
 	missingFields := &EventRequest{
-		Name:       "big_deal",
+		Name: "big_deal",
 	}
 
 	bytes, err = json.Marshal(missingFields)

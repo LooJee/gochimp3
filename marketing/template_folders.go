@@ -1,7 +1,7 @@
-package gochimp3
+package marketing
 
 const (
-	template_folders_path       = "/template-folders"
+	template_folders_path = "/template-folders"
 	// single folder endpoint not implemented
 )
 
@@ -19,7 +19,7 @@ type TemplateFolder struct {
 
 	Name  string `json:"name"`
 	ID    string `json:"id"`
-	Count uint `json:"count"`
+	Count uint   `json:"count"`
 
 	api *API
 }
