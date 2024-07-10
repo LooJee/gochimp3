@@ -13,7 +13,8 @@ type SendMessageToItem struct {
 }
 
 type SendMessageItem struct {
-	Text        string              `json:"text"`
+	Text        string              `json:"text,omitempty"`
+	HTML        string              `json:"html,omitempty"`
 	Subject     string              `json:"subject"`
 	FromEmail   string              `json:"from_email"`
 	FromName    string              `json:"from_name,omitempty"`

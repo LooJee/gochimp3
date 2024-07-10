@@ -20,6 +20,7 @@ type API struct {
 
 	PingApi    *PingApi
 	MessageApi *MessageApi
+	InboundApi *inboundApi
 }
 
 func New(apiKey string) *API {
@@ -30,6 +31,7 @@ func New(apiKey string) *API {
 
 	api.PingApi = newPingApi(api)
 	api.MessageApi = newMessageApi(api)
+	api.InboundApi = newInboundApi(api)
 
 	return api
 }
