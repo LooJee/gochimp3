@@ -21,6 +21,7 @@ type SendMessageItem struct {
 	To          []SendMessageToItem `json:"to"`
 	TrackOpens  bool                `json:"track_opens"`  // 是否跟踪邮件打开
 	TrackClicks bool                `json:"track_clicks"` // 是否跟踪邮件点击
+	Headers     map[string]string   `json:"headers"`      //
 }
 
 type SendMessageReq struct {
