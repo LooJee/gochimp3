@@ -23,6 +23,7 @@ type SendMessageItem struct {
 	TrackOpens  bool                `json:"track_opens"`  // 是否跟踪邮件打开
 	TrackClicks bool                `json:"track_clicks"` // 是否跟踪邮件点击
 	Headers     map[string]string   `json:"headers"`      //
+	Tags        []string            `json:"tags"`
 }
 
 type SendMessageReq struct {
