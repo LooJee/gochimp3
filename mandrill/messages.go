@@ -4,6 +4,7 @@ import "context"
 
 const (
 	sendMsgPath = "/messages/send"
+	msgInfoPath = "/messages/info"
 )
 
 type SendMessageToItem struct {
@@ -54,6 +55,54 @@ func (api *MessageApi) Send(ctx context.Context, req *SendMessageReq) (resp Send
 	req.Key = api.api.Key
 
 	err = api.api.Post(ctx, sendMsgPath, req, &resp)
+
+	return resp, err
+}
+
+type MessageInfoReq struct {
+	Key string `json:"key"`
+	Id  string `json:"id"`
+}
+
+type MessageInfoOpensDetail struct {
+	Ts       int    `json:"ts"`
+	Ip       string `json:"ip"`
+	Location string `json:"location"`
+	Ua       string `json:"ua"`
+}
+
+type MessageInfoClicksDetail struct {
+	MessageInfoOpensDetail
+	Url string `json:"url"`
+}
+
+type MessageInfoSmtpEvent struct {
+	Ts   int    `json:"ts"`
+	Type string `json:"type"`
+	Diag string `json:"diag"`
+}
+
+type MessageInfoResp struct {
+	Ts           int                       `json:"ts"`
+	Id           string                    `json:"_id"`
+	Sender       string                    `json:"sender"`
+	Template     string                    `json:"template"`
+	Subject      string                    `json:"subject"`
+	Email        string                    `json:"email"`
+	Tags         []string                  `json:"tags"`
+	Opens        int                       `json:"opens"`
+	OpensDetail  []MessageInfoOpensDetail  `json:"opens_detail"`
+	Clicks       int                       `json:"clicks"`
+	ClicksDetail []MessageInfoClicksDetail `json:"clicks_detail"`
+	State        string                    `json:"state"`
+	Metadata     any                       `json:"metadata"`
+	SmtpEvents   []MessageInfoSmtpEvent    `json:"smtp_events"`
+}
+
+func (api *MessageApi) Info(ctx context.Context, req *MessageInfoReq) (resp *MessageInfoResp, err error) {
+	req.Key = api.api.Key
+
+	err = api.api.Post(ctx, msgInfoPath, req, &resp)
 
 	return resp, err
 }
